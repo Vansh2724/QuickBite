@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import MobileNav from "../MobileNav";
-import MainNav from "../MainNav";
+import MobileNav from "./MobileNav";
+import MainNav from "./MainNav";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
           to="/"
           className="text-3xl font-bold tracking-tight text-green-600"
         >
-          QuickBite.com
+          QuickBite
         </Link>
         <div className="md:hidden">
           <MobileNav />

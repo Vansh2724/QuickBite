@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// import image from "../assets/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
+import image from "../assets/images/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
 import hero from "../assets/images/image.png";
 import cityFoodImage from "../assets/images/Group 2.png";
 import quote from "../assets/images/carbon_quotes.png";
@@ -72,7 +72,11 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-delay="1600"
           >
-           
+            <img
+              src={image}
+              alt="Background"
+              className="w-[300px] min-h-[200px] object-cover opacity-30"
+            />
           </div>
         </div>
       </div>
