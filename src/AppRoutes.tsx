@@ -2,15 +2,15 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout";
 import HomePage from "./pages/HomePage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
-import UserProfilePage from "./pages/UserProfilePage";
-import AboutUSPage from "./pages/AboutUSPage";
-import FAQsPage from "./pages/FAQsPage";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import ManageRestaurantPage from "./pages/ManageRestaurantPage";
-import SearchPage from "./pages/SearchPage";
-import DetailPage from "./pages/DetailPage";
-import Footer from "./components/Footer";
-import OrderStatusPage from "./pages/OrderStatusPage";
+// import UserProfilePage from "./pages/UserProfilePage";
+// import AboutUSPage from "./pages/AboutUSPage";
+// import FAQsPage from "./pages/FAQsPage";
+// import ProtectedRoute from "./auth/ProtectedRoute";
+// import ManageRestaurantPage from "./pages/ManageRestaurantPage";
+// import SearchPage from "./pages/SearchPage";
+// import DetailPage from "./pages/DetailPage";
+// import Footer from "./components/Footer";
+// import OrderStatusPage from "./pages/OrderStatusPage";
 
 const AppRoutes = () => {
   return (
@@ -25,7 +25,7 @@ const AppRoutes = () => {
       />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
 
-      <Route
+      {/* <Route
         path="/search/:city"
         element={
           <Layout showHero={false}>
@@ -89,7 +89,7 @@ const AppRoutes = () => {
             <FAQsPage />
           </Layout>
         }
-      />
+      /> */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

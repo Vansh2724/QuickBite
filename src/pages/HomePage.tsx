@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import hero from "../assets/image.png";
-import image from "../assets/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
-import cityFoodImage from "../assets/Group 2.png";
-import quote from "../assets/carbon_quotes.png";
-import quotes from "../assets/ph_quotes-fill.png";
-import frame from "../assets/Frame.png";
-import frame1 from "../assets/Frame (1).png";
-import frame2 from "../assets/Frame (2).png";
+// import image from "../assets/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
+import hero from "../assets/images/image.png";
+import cityFoodImage from "../assets/images/Group 2.png";
+import quote from "../assets/images/carbon_quotes.png";
+import quotes from "../assets/images/ph_quotes-fill.png";
+import frame from "../assets/images/Frame.png";
+import frame1 from "../assets/images/Frame (1).png";
+import frame2 from "../assets/images/Frame (2).png";
 import SearchBar, { SearchForm } from "../components/SearchBar";
 import { useNavigate } from "react-router-dom";
 
@@ -72,11 +72,7 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-delay="1600"
           >
-            <img
-              src={image}
-              alt="Background"
-              className="w-[300px] min-h-[200px] object-cover opacity-30"
-            />
+           
           </div>
         </div>
       </div>
