@@ -11,7 +11,7 @@ import FAQsPage from "./pages/FAQsPage";
 // import SearchPage from "./pages/SearchPage";
 // import DetailPage from "./pages/DetailPage";
 // import OrderStatusPage from "./pages/OrderStatusPage";
-
+import React from "react";
 const AppRoutes = () => {
   return (
     <Routes>
