@@ -6,7 +6,7 @@ import AuthCallbackPage from "./pages/AuthCallbackPage";
 import AboutUSPage from "./pages/AboutUSPage";
 import Footer from "./components/Footer";
 import FAQsPage from "./pages/FAQsPage";
-// import ProtectedRoute from "./auth/ProtectedRoute";
+import ProtectedRoute from "./auth/ProtectedRoute";
 // import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 // import SearchPage from "./pages/SearchPage";
 // import DetailPage from "./pages/DetailPage";
