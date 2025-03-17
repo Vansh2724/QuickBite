@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { SearchState } from "../pages/SearchPage";
 import { Restaurant, RestaurantSearchResponse } from "../types";
+=======
+import { SearchState } from "@/pages/SearchPage";
+import { Restaurant, RestaurantSearchResponse } from "@/types";
+>>>>>>> chirag_2
 import { useQuery } from "react-query";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
