@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import DetailsSection from "./DetailsSection";
 import { Separator } from "../../../components/ui/separator";
-import CuisinesSection from "./CuisinesSection";
-import MenuSection from "./MenuSection";
-import ImageSection from "./ImageSection";
-import LoadingButton from "../../../components/LoadingButton";
-import { Button } from "../../../components/ui/button";
-import image from "@/assets/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
+// import CuisinesSection from "./CuisinesSection";
+// import MenuSection from "./MenuSection";
+// import ImageSection from "./ImageSection";
+// import LoadingButton from "../../../components/LoadingButton";
+// import { Button } from "../../../components/ui/button";
+// import image from "../../../assets/images/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
 import { Restaurant } from "../../../types";
 import { useEffect } from "react";
 
@@ -125,28 +125,18 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
 
   return (
     <Form {...form}>
-      <img
-        src={image}
-        alt="Leaf"
-        className="absolute top-40 -left-4 w-48 h-48 opacity-70 z-0"
-      />
-      <img
-        src={image}
-        alt="Leaf"
-        className="absolute -bottom-96 right-4 w-48 h-48 opacity-70 object-cover z-0"
-      />
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-8 bg-gray-50 p-10 rounded-lg"
       >
         <DetailsSection />
         <Separator />
-        <CuisinesSection />
+        {/* <CuisinesSection />
         <Separator />
         <MenuSection />
         <Separator />
-        <ImageSection />
-        {isLoading ? (
+        <ImageSection /> */}
+        {/* {isLoading ? (
           <LoadingButton />
         ) : (
           <Button
@@ -155,7 +145,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
           >
             Submit
           </Button>
-        )}
+        )} */}
       </form>
       <footer
         className="bg-green-700 text-white py-6 mt-10 rounded-2xl mb-4"
