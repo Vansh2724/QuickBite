@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout";
 import HomePage from "./pages/HomePage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
-// import UserProfilePage from "./pages/UserProfilePage";
+import UserProfilePage from "./pages/UserProfilePage";
 import AboutUSPage from "./pages/AboutUSPage";
 import Footer from "./components/Footer";
 import FAQsPage from "./pages/FAQsPage";
@@ -25,7 +25,7 @@ const AppRoutes = () => {
       />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
 
-      { <Route
+      <Route
         path="/search/:city"
         element={
           <Layout showHero={false}>
@@ -34,7 +34,7 @@ const AppRoutes = () => {
         }
       />
 
-   /*   <Route
+      {/* <Route
         path="/detail/:restaurantId"
         element={
           <Layout showHero={false}>
@@ -42,10 +42,10 @@ const AppRoutes = () => {
             <Footer />
           </Layout>
         }
-      />
+      /> */}
 
       <Route element={<ProtectedRoute />}>
-        <Route
+        {/* <Route
           path="/order-status"
           element={
             <Layout>
@@ -53,7 +53,7 @@ const AppRoutes = () => {
               <Footer />
             </Layout>
           }
-        />
+        /> */}
         <Route
           path="/user-profile"
           element={
@@ -63,16 +63,16 @@ const AppRoutes = () => {
             </Layout>
           }
         />
-        <Route
+        {/* <Route
           path="/manage-restaurant"
           element={
             <Layout>
               <ManageRestaurantPage />
             </Layout>
           }
-        />
+        /> */}
       </Route>
-*/}
+
       <Route
         path="/about-us"
         element={
@@ -82,7 +82,6 @@ const AppRoutes = () => {
           </Layout>
         }
       />
-  
       <Route
         path="/faqs"
         element={
@@ -90,7 +89,7 @@ const AppRoutes = () => {
             <FAQsPage />
           </Layout>
         }
-      /> 
+      />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
