@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import DetailsSection from "./DetailsSection";
 import { Separator } from "../../../components/ui/separator";
-// import CuisinesSection from "./CuisinesSection";
-// import MenuSection from "./MenuSection";
-// import ImageSection from "./ImageSection";
-// import LoadingButton from "../../../components/LoadingButton";
-// import { Button } from "../../../components/ui/button";
+import CuisinesSection from "./CuisinesSection";
+import MenuSection from "./MenuSection";
+import ImageSection from "./ImageSection";
+import LoadingButton from "../../../components/LoadingButton";
+import { Button } from "../../../components/ui/button";
 // import image from "../../../assets/images/—Pngtree—hand-painted noise green leaf element_4054582 1.png";
 import { Restaurant } from "../../../types";
 import { useEffect } from "react";
@@ -131,12 +131,12 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
       >
         <DetailsSection />
         <Separator />
-        {/* <CuisinesSection />
+        <CuisinesSection />
         <Separator />
         <MenuSection />
         <Separator />
-        <ImageSection /> */}
-        {/* {isLoading ? (
+        <ImageSection />
+        {isLoading ? (
           <LoadingButton />
         ) : (
           <Button
@@ -145,7 +145,7 @@ const ManageRestaurantForm = ({ onSave, isLoading, restaurant }: Props) => {
           >
             Submit
           </Button>
-        )} */}
+        )}
       </form>
       <footer
         className="bg-green-700 text-white py-6 mt-10 rounded-2xl mb-4"
