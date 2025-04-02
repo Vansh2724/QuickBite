@@ -9,8 +9,8 @@ import FAQsPage from "./pages/FAQsPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
-// import DetailPage from "./pages/DetailPage";
-// import OrderStatusPage from "./pages/OrderStatusPage";
+import DetailPage from "./pages/DetailPage";
+import OrderStatusPage from "./pages/OrderStatusPage";
 import React from "react";
 const AppRoutes = () => {
   return (
@@ -34,7 +34,7 @@ const AppRoutes = () => {
         }
       />
 
-      {/* <Route
+      <Route
         path="/detail/:restaurantId"
         element={
           <Layout showHero={false}>
@@ -42,10 +42,10 @@ const AppRoutes = () => {
             <Footer />
           </Layout>
         }
-      /> */}
+      />
 
       <Route element={<ProtectedRoute />}>
-        {/* <Route
+        <Route
           path="/order-status"
           element={
             <Layout>
@@ -53,7 +53,7 @@ const AppRoutes = () => {
               <Footer />
             </Layout>
           }
-        /> */}
+        />
         <Route
           path="/user-profile"
           element={
