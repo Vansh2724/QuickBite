@@ -32,7 +32,9 @@ export type OrderStatus =
   | "paid"
   | "inProgress"
   | "outForDelivery"
-  | "delivered";
+  | "delivered"
+  | "cancelled";
+
 
 export type Order = {
   _id: string;

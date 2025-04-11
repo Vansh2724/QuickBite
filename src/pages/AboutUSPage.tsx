@@ -231,58 +231,44 @@ const AboutUSPage: React.FC = () => {
     Meet Our Team
   </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 justify-center">
-    {[
-      {
-        name: "Vansh Patel",
-        role: "Developer",
-        img: vansh,
-        linkedin: "#",
-      },
-      {
-        name: "Chirag Senma",
-        role: "Content Writer & Story Architect",
-        img: chirag,
-        linkedin: "#",
-      }
-    ].map((member, index) => (
-      <div
-        key={index}
-        className="team-member max-w-xs w-full text-center transition-transform transform hover:scale-105 duration-700 ease-in-out"
-        data-aos="fade-up"
-        data-aos-delay={`${500 + index * 100}`}
-        data-aos-duration="1000"
-      >
-        {/* Image Container */}
-        <div className="w-full h-96 flex justify-center items-center overflow-hidden rounded-lg mb-4">
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full h-full"
-          >
-            <img
-              src={member.img}
-              alt={member.name}
-              className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-700"
-            />
-          </a>
+  <div className="flex justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+      {[
+        {
+          name: "Vansh Patel",
+          role: "Developer",
+          img: vansh
+        },
+        {
+          name: "Chirag Senma",
+          role: "Developer",
+          img: chirag
+        }
+      ].map((member, index) => (
+        <div
+          key={index}
+          className="team-member max-w-xs w-full text-center transition-transform transform hover:scale-105 duration-700 ease-in-out"
+          data-aos="fade-up"
+          data-aos-delay={`${500 + index * 100}`}
+          data-aos-duration="1000"
+        >
+          <div className="w-full h-96 flex justify-center items-center overflow-hidden rounded-lg mb-4">
+
+              <img
+                src={member.img}
+                alt={member.name}
+                className="w-full h-full object-cover object-center hover:scale-110 transition-transform duration-700"
+              />
+          </div>
+
+          <h4 className="text-xl font-semibold">
+
+              {member.name}
+          </h4>
+          <p className="text-gray-600">{member.role}</p>
         </div>
-        
-        {/* Name and Role */}
-        <h4 className="text-xl font-semibold">
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:no-underline"
-          >
-            {member.name}
-          </a>
-        </h4>
-        <p className="text-gray-600">{member.role}</p>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </div>
       </div>
