@@ -9,10 +9,12 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { bookTable } from "../api/BookTable"; // ✅ use API module
 
 type Props = {
   restaurantName: string;
 };
+
 
 export const BookDineModal = ({ restaurantName }: Props) => {
   const [form, setForm] = useState({
@@ -41,7 +43,6 @@ export const BookDineModal = ({ restaurantName }: Props) => {
     const maxDate = new Date();
     maxDate.setDate(today.getDate() + 2); // 3-day window
 
-    // Set hours to avoid comparing time
     selected.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
     maxDate.setHours(0, 0, 0, 0);
@@ -59,7 +60,7 @@ export const BookDineModal = ({ restaurantName }: Props) => {
     return isLunch || isDinner;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!isDateValid(form.date)) {
@@ -72,10 +73,13 @@ export const BookDineModal = ({ restaurantName }: Props) => {
       return;
     }
 
-    setError(""); // clear any previous error
-
-    console.log("Booking Data:", { restaurantName, ...form });
-    alert("Table booked successfully!");
+    try {
+      setError("");
+      await bookTable({  restaurantName, ...form });
+      alert("Table booked successfully!");
+    } catch (err: any) {
+      setError(err.message || "Booking failed. Try again.");
+    }
   };
 
   return (
@@ -125,7 +129,9 @@ export const BookDineModal = ({ restaurantName }: Props) => {
               onChange={handleChange}
               required
             />
-            <small className="text-gray-500">Bookings allowed for today + 2 days only.</small>
+            <small className="text-gray-500">
+              Bookings allowed for today + 2 days only.
+            </small>
           </div>
 
           <div>
@@ -137,7 +143,9 @@ export const BookDineModal = ({ restaurantName }: Props) => {
               onChange={handleChange}
               required
             />
-            <small className="text-gray-500">Available: 11:00–14:00 and 19:00–23:00</small>
+            <small className="text-gray-500">
+              Available: 11:00–14:00 and 19:00–23:00
+            </small>
           </div>
 
           <div>
