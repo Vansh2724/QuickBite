@@ -127,7 +127,7 @@ const DetailPage = () => {
       <div className="grid md:grid-cols-[4fr_2fr] gap-5 md:px-32">
         <div className="flex flex-col gap-4">
           <RestaurantInfo restaurant={restaurant} />
-          <BookDineModal restaurantName={restaurant.restaurantName} />
+          <BookDineModal restaurantId={restaurant._id} restaurantName={restaurant.restaurantName} />
           <span className="text-2xl font-bold tracking-tight ml-1">Menu</span>
           {restaurant.menuItems.map((menuItem) => (
             <MenuItem

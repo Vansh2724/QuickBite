@@ -10,27 +10,27 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
-import { bookTable } from "../api/BookTable"; // ✅ API function
+import { bookTable } from "../api/BookTable";
 
 type Props = {
+  restaurantId: string;
   restaurantName: string;
 };
 
-export const BookDineModal = ({ restaurantName }: Props) => {
+export const BookDineModal = ({ restaurantId, restaurantName }: Props) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     date: "",
     time: "",
     people: 1,
   });
 
   const [error, setError] = useState("");
-  const [open, setOpen] = useState(false); // for dialog control
+  const [open, setOpen] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
@@ -76,15 +76,15 @@ export const BookDineModal = ({ restaurantName }: Props) => {
 
     try {
       setError("");
-      await bookTable({ restaurantName, ...form });
+      await bookTable({ restaurantId, restaurantName, ...form });
 
       toast.success("Table booked successfully! 🎉");
 
-      // Close modal and reset form
       setOpen(false);
       setForm({
         name: "",
         email: "",
+        phone: "",
         date: "",
         time: "",
         people: 1,
@@ -127,6 +127,17 @@ export const BookDineModal = ({ restaurantName }: Props) => {
               type="email"
               placeholder="you@example.com"
               value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input
+              name="phone"
+              placeholder="e.g. 9876543210"
+              value={form.phone}
               onChange={handleChange}
               required
             />
