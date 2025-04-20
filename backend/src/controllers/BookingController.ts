@@ -1,14 +1,11 @@
 // controllers/bookingController.ts
 import { Request, Response } from "express";
 import { Booking } from "../models/booking";
-import { log } from "console";
+import { sendBookingEmail } from "../utils/email"; // ✅ Import this
 
 export const createBooking = async (req: Request, res: Response) => {
   try {
-    console.log("hello");
-    console.log(req.body);
-    
-    const { restaurantId, restaurantName, name, email, date, time, people } = req.body;
+    const { restaurantName, name, email, date, time, people } = req.body;
 
     if (!restaurantName || !name || !email || !date || !time || !people) {
       return res.status(400).json({ message: "All fields are required" });
@@ -24,6 +21,16 @@ export const createBooking = async (req: Request, res: Response) => {
     });
 
     await booking.save();
+
+    // ✅ Send confirmation email
+    await sendBookingEmail({
+      to: email,
+      name,
+      restaurantName,
+      date,
+      time,
+      people,
+    });
 
     res.status(201).json({ message: "Booking successful", booking });
   } catch (err) {

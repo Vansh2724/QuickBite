@@ -9,12 +9,12 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { bookTable } from "../api/BookTable"; // ✅ use API module
+import { toast } from "sonner";
+import { bookTable } from "../api/BookTable"; // ✅ API function
 
 type Props = {
   restaurantName: string;
 };
-
 
 export const BookDineModal = ({ restaurantName }: Props) => {
   const [form, setForm] = useState({
@@ -26,6 +26,7 @@ export const BookDineModal = ({ restaurantName }: Props) => {
   });
 
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false); // for dialog control
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +42,7 @@ export const BookDineModal = ({ restaurantName }: Props) => {
     const selected = new Date(dateStr);
     const today = new Date();
     const maxDate = new Date();
-    maxDate.setDate(today.getDate() + 2); // 3-day window
+    maxDate.setDate(today.getDate() + 2);
 
     selected.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
@@ -75,15 +76,26 @@ export const BookDineModal = ({ restaurantName }: Props) => {
 
     try {
       setError("");
-      await bookTable({  restaurantName, ...form });
-      alert("Table booked successfully!");
+      await bookTable({ restaurantName, ...form });
+
+      toast.success("Table booked successfully! 🎉");
+
+      // Close modal and reset form
+      setOpen(false);
+      setForm({
+        name: "",
+        email: "",
+        date: "",
+        time: "",
+        people: 1,
+      });
     } catch (err: any) {
       setError(err.message || "Booking failed. Try again.");
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded shadow">
           Book a Dine
