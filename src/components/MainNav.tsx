@@ -3,14 +3,21 @@ import { Button } from "./ui/button";
 import UsernameMenu from "./UsernameMenu";
 import { Link } from "react-router-dom";
 import React from "react";
+import { isAdmin } from "../utils/isAdmin";
 
 const MainNav = () => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
   return (
     <span className="flex space-x-2 items-center">
       {isAuthenticated ? (
         <>
+          {isAdmin(user?.email) && (
+            <Link to="/admin" className=" font-bold hover: text-green-600">
+              Admin
+            </Link>
+          )}
+
           <Link to="/order-status" className=" font-bold hover: text-green-600">
             Order Status
           </Link>

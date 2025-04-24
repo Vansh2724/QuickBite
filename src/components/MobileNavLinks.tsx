@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useAuth0 } from "@auth0/auth0-react";
+import { isAdmin } from "../utils/isAdmin";
 
 const MobileNavLinks = () => {
-  const { logout } = useAuth0();
+  const { logout, user } = useAuth0();
 
   return (
     <>
+      {isAdmin(user?.email) && (
+        <Link to="/admin" className=" font-bold hover: text-green-600">
+          Admin
+        </Link>
+      )}
       <Link
         to="/order-status"
         className="flex bg-white text-black items-center font-bold hover:text-green-600"

@@ -9,6 +9,7 @@ import myRestaurantRoute from "./routes/MyRestaurantRoute";
 import restaurantRoute from "./routes/RestaurantRoute";
 import orderRoute from "./routes/OrderRoute";
 import bookingRoutes from "./routes/BookingRoute";
+import adminRoutes from "./routes/admin";
 
 
 mongoose
@@ -39,6 +40,8 @@ app.use("/api/restaurant", restaurantRoute);
 app.use("/api/order", orderRoute);
 
 app.use("/api/bookings", bookingRoutes);
+
+app.use("/api/admin", adminRoutes);
 
 app.listen(7000, () => {
   console.log("server started on localhost:7000");

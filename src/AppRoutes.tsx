@@ -11,8 +11,14 @@ import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
+import AdminPage from "./pages/AdminPage"; // ✅ Import Admin Page
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { isAdmin } from "./utils/isAdmin"; // ✅ Utility to check admin
+
 const AppRoutes = () => {
+  const { user } = useAuth0();
+
   return (
     <Routes>
       <Route
@@ -44,6 +50,7 @@ const AppRoutes = () => {
         }
       />
 
+      {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route
           path="/order-status"
@@ -63,16 +70,31 @@ const AppRoutes = () => {
             </Layout>
           }
         />
-        { <Route
+        <Route
           path="/manage-restaurant"
           element={
             <Layout>
               <ManageRestaurantPage />
             </Layout>
           }
-        /> }
+        />
+
+        {/* ✅ Admin Page Route */}
+        <Route
+          path="/admin"
+          element={
+            isAdmin(user?.email) ? (
+              <Layout>
+                <AdminPage />
+              </Layout>
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
       </Route>
 
+      {/* Public Pages */}
       <Route
         path="/about-us"
         element={
@@ -90,6 +112,8 @@ const AppRoutes = () => {
           </Layout>
         }
       />
+
+      {/* Catch all */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
