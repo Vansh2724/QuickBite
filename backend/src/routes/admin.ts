@@ -1,12 +1,24 @@
-// routes/admin.ts
 import express from "express";
-import { jwtCheck } from "../middleware/auth"; // still good to verify token
+import { jwtCheck } from "../middleware/auth";
 import { isAdmin } from "../middleware/isAdmin";
+import {
+  getAllUsers,
+  getAllRestaurants,
+  deleteUser,
+  deleteRestaurant,
+} from "../controllers/adminController";
 
 const router = express.Router();
 
-router.get("/dashboard", jwtCheck, isAdmin, (req, res) => {
-  res.json({ message: "Welcome Admin via email header!" });
+router.use(jwtCheck, isAdmin);
+
+router.get("/dashboard", (req, res) => {
+  res.json({ message: "Welcome Admin!" });
 });
+
+router.get("/users", getAllUsers);
+router.get("/restaurants", getAllRestaurants);
+router.delete("/user/:id", deleteUser);
+router.delete("/restaurant/:id", deleteRestaurant);
 
 export default router;
