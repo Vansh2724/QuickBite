@@ -1,12 +1,13 @@
-import { useAuth0 } from "@auth0/auth0-react";
+// src/api/BookingsApi.ts
+
+import { Booking } from "../types";
 import { useQuery } from "react-query";
-
+import { useAuth0 } from "@auth0/auth0-react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 export const useGetMyRestaurantBookings = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const fetchBookings = async () => {
+  const fetchBookings = async (): Promise<Booking[]> => {
     const accessToken = await getAccessTokenSilently();
 
     const response = await fetch(`${API_BASE_URL}/api/bookings/check-bookings`, {
@@ -20,13 +21,17 @@ export const useGetMyRestaurantBookings = () => {
       throw new Error("Failed to fetch bookings");
     }
 
-    return response.json();
+    const data = await response.json();
+    return data.bookings;
   };
 
-  const { data, isLoading, error } = useQuery("fetchMyRestaurantBookings", fetchBookings);
+  const { data: bookings, isLoading, error } = useQuery<Booking[]>(
+    "fetchMyRestaurantBookings",
+    fetchBookings
+  );
 
   return {
-    bookings: data?.bookings,
+    bookings,
     isLoading,
     error,
   };

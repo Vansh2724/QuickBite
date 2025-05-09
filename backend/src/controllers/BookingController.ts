@@ -51,6 +51,8 @@ export const createBooking = async (req: Request, res: Response) => {
 
 export const getTodayBookingsForMyRestaurant = async (req: Request, res: Response) => {
   try {
+    console.log("Hello i am finding bookings");
+    
     const userId = req.userId;
     
     const restaurant = await Restaurant.findOne({ user: userId });

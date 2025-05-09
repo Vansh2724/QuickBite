@@ -29,44 +29,41 @@ const SearchPage = () => {
 
   const { results, isLoading } = useSearchRestaurants(searchState, city);
 
-  const setSortOption = (sortOption: string) => {
-    setSearchState((prevState) => ({ ...prevState, sortOption, page: 1 }));
-  };
+  const setSortOption = (sortOption: string) =>
+    setSearchState((prev) => ({ ...prev, sortOption, page: 1 }));
 
-  const setSelectedCuisines = (selectedCuisines: string[]) => {
-    setSearchState((prevState) => ({
-      ...prevState,
-      selectedCuisines,
-      page: 1,
-    }));
-  };
+  const setSelectedCuisines = (selectedCuisines: string[]) =>
+    setSearchState((prev) => ({ ...prev, selectedCuisines, page: 1 }));
 
-  const setPage = (page: number) => {
-    setSearchState((prevState) => ({ ...prevState, page }));
-  };
+  const setPage = (page: number) =>
+    setSearchState((prev) => ({ ...prev, page }));
 
-  const setSearchQuery = (searchFormData: SearchForm) => {
-    setSearchState((prevState) => ({
-      ...prevState,
+  const setSearchQuery = (searchFormData: SearchForm) =>
+    setSearchState((prev) => ({
+      ...prev,
       searchQuery: searchFormData.searchQuery,
       page: 1,
     }));
-  };
 
-  const resetSearch = () => {
-    setSearchState((prevState) => ({
-      ...prevState,
-      searchQuery: "",
-      page: 1,
-    }));
-  };
+  const resetSearch = () =>
+    setSearchState((prev) => ({ ...prev, searchQuery: "", page: 1 }));
 
+  // --- Loading state render ---
   if (isLoading) {
-    <span>Loading...</span>;
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <span className="text-lg font-semibold">Loading...</span>
+      </div>
+    );
   }
 
+  // --- No results or invalid city ---
   if (!results?.data || !city) {
-    return <span>No results found</span>;
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <span className="text-lg font-semibold">No results found</span>
+      </div>
+    );
   }
 
   return (
@@ -77,9 +74,7 @@ const SearchPage = () => {
             selectedCuisines={searchState.selectedCuisines}
             onChange={setSelectedCuisines}
             isExpanded={isExpanded}
-            onExpandedClick={() =>
-              setIsExpanded((prevIsExpanded) => !prevIsExpanded)
-            }
+            onExpandedClick={() => setIsExpanded((prev) => !prev)}
           />
         </div>
         <div id="main-content" className="flex flex-col gap-5">
@@ -93,13 +88,17 @@ const SearchPage = () => {
             <SearchResultInfo total={results.pagination.total} city={city} />
             <SortOptionDropdown
               sortOption={searchState.sortOption}
-              onChange={(value) => setSortOption(value)}
+              onChange={setSortOption}
             />
           </div>
 
           {results.data.map((restaurant) => (
-            <SearchResultCard restaurant={restaurant} />
+            <SearchResultCard
+              key={restaurant._id} // <-- Using _id as the unique key
+              restaurant={restaurant}
+            />
           ))}
+
           <PaginationSelector
             page={results.pagination.page}
             pages={results.pagination.pages}
@@ -107,6 +106,8 @@ const SearchPage = () => {
           />
         </div>
       </div>
+
+      {/* Footer */}
       <footer
         className="bg-green-700 text-white py-6 rounded-2xl mb-4 mt-16"
         data-aos="fade-up"
@@ -131,7 +132,7 @@ const SearchPage = () => {
               data-aos="fade-up"
               data-aos-delay="600"
             >
-              About US
+              About Us
             </a>
             <a
               href="/faqs"

@@ -65,3 +65,13 @@ export type RestaurantSearchResponse = {
     pages: number;
   };
 };
+
+export type Booking = {
+  _id: string;
+  date: string;
+  time: string;
+  numberOfGuests: number;
+  customerName: string;
+  customerEmail: string;
+  // add any more fields your booking document contains
+};

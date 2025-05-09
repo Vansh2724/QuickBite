@@ -25,7 +25,7 @@ export const sendBookingEmail = async ({
   });
 
   const mailOptions = {
-    from: `"QuickByte" <${process.env.EMAIL_USER}>`,
+    from: `"QuickBite" <${process.env.EMAIL_USER}>`,
     to,
     subject: `Your Booking at ${restaurantName}`,
     html: `

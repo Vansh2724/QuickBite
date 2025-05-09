@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+
 export const useGetMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
 
@@ -31,6 +32,7 @@ export const useGetMyRestaurant = () => {
   return { restaurant, isLoading };
 };
 
+
 export const useCreateMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
 
@@ -44,32 +46,28 @@ export const useCreateMyRestaurant = () => {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-
       body: restaurantFormData,
     });
+
     if (!response.ok) {
       throw new Error("Failed to create restaurant");
     }
+
     return response.json();
   };
 
-  const {
-    mutate: createRestaurant,
-    isLoading,
-    isSuccess,
-    error,
-  } = useMutation(createMyRestaurantRequest);
-
-  if (isSuccess) {
-    toast.success("Restaurant created!");
-  }
-
-  if (error) {
-    toast.error("Unable to update restaurant");
-  }
+  const { mutate: createRestaurant, isLoading } = useMutation(createMyRestaurantRequest, {
+    onSuccess: () => {
+      toast.success("Restaurant created!");
+    },
+    onError: () => {
+      toast.error("Unable to create restaurant");
+    },
+  });
 
   return { createRestaurant, isLoading };
 };
+
 
 export const useUpdateMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
@@ -86,29 +84,24 @@ export const useUpdateMyRestaurant = () => {
       body: restaurantFormData,
     });
 
-    if (!response) {
+    if (!response.ok) {
       throw new Error("Failed to update restaurant");
     }
     return response.json();
   };
 
-  const {
-    mutate: updateRestaurant,
-    isLoading,
-    error,
-    isSuccess,
-  } = useMutation(updateRestaurantRequest);
-
-  if (isSuccess) {
-    toast.success("Restaurant Updated");
-  }
-
-  if (error) {
-    toast.error("Unable to update restaurant");
-  }
+  const { mutate: updateRestaurant, isLoading } = useMutation(updateRestaurantRequest, {
+    onSuccess: () => {
+      toast.success("Restaurant updated!");
+    },
+    onError: () => {
+      toast.error("Unable to update restaurant");
+    },
+  });
 
   return { updateRestaurant, isLoading };
 };
+
 
 export const useGetMyRestaurantOrders = () => {
   const { getAccessTokenSilently } = useAuth0();
@@ -118,9 +111,10 @@ export const useGetMyRestaurantOrders = () => {
     const response = await fetch(`${API_BASE_URL}/api/my/restaurant/order`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "Application/json",
+        "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) {
       throw new Error("Failed to get orders");
     }
@@ -134,6 +128,7 @@ export const useGetMyRestaurantOrders = () => {
 
   return { orders, isLoading };
 };
+
 
 type UpdateOrderStatusRequest = {
   orderId: string;
@@ -158,26 +153,21 @@ export const useUpdateMyRestaurantOrder = () => {
         body: JSON.stringify({ status: updateStatusOrderRequest.status }),
       }
     );
+
     if (!response.ok) {
-      throw new Error("Failed to update status");
+      throw new Error("Failed to update order status");
     }
     return response.json();
   };
 
-  const {
-    mutateAsync: updateRestaurantStatus,
-    isLoading,
-    isError,
-    isSuccess,
-    reset,
-  } = useMutation(updateMyRestaurantOrder);
+  const { mutateAsync: updateRestaurantStatus, isLoading } = useMutation(updateMyRestaurantOrder, {
+    onSuccess: () => {
+      toast.success("Order status updated!");
+    },
+    onError: () => {
+      toast.error("Failed to update order status");
+    },
+  });
 
-  if (isSuccess) {
-    toast.success("Order Updated");
-  }
-  if (isError) {
-    toast.error("Failed to update order");
-    reset();
-  }
   return { updateRestaurantStatus, isLoading };
 };

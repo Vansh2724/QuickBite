@@ -5,16 +5,21 @@ import { ORDER_STATUS } from "../config/order-status-config";
 type Props = {
   order: Order;
 };
+
 const OrderStatusHeader = ({ order }: Props) => {
   const getExpectedDelivery = () => {
+    if (!order.restaurant) {
+      return "Unknown delivery time";
+    }
+
     const created = new Date(order.createdAt);
     created.setMinutes(
       created.getMinutes() + order.restaurant.estimatedDeliveryTime
     );
     const hours = created.getHours();
     const minutes = created.getMinutes();
-    const paddedMiutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${hours}:${paddedMiutes}`;
+    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${hours}:${paddedMinutes}`;
   };
 
   const getOrderStatusInfo = () => {
